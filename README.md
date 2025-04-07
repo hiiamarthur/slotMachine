@@ -98,7 +98,7 @@ This is a .NET-based slot machine application that demonstrates modern software 
 
 #### Using Swagger UI
 1. Run the API project
-2. Navigate to `https://localhost:5001/swagger` (or your configured port)
+2. Navigate to `https://localhost:7270/swagger` (or your configured port)
 3. Available endpoints:
    - `POST /api/machine/spin` - Spin the machine
    - `POST /api/machine/update-balance` - Get current game state
@@ -107,21 +107,23 @@ This is a .NET-based slot machine application that demonstrates modern software 
 #### Using Postman/curl
 1. Create a new player:
    ```bash
-   curl -X POST "https://localhost:5001/api/player/create" \
+   curl -X POST "https://localhost:7270/api/machine/player" \
    -H "Content-Type: application/json" \
    -d '{"name": "TestPlayer", "initialBalance": 1000}'
    ```
 
 2. Play a game:
    ```bash
-   curl -X POST "https://localhost:5001/api/game/play" \
+   curl -X POST "https://localhost:7270/api/machine/spin" \
    -H "Content-Type: application/json" \
-   -d '{"playerId": "player-id", "betAmount": 10}'
+   -d '{"betAmount": 10}'
    ```
 
 3. Check player state:
    ```bash
-   curl -X GET "https://localhost:5001/api/player/player-id"
+   curl -X GET "https://localhost:7270/api/machine/update-balance"\
+   -H "Content-Type: application/json" \
+   -d '{"creditAmount": 10}'
    ```
 
 #### Test Cases to Verify
