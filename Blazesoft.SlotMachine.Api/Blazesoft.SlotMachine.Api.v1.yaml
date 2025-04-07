@@ -1,0 +1,102 @@
+openapi: 3.0.1
+info:
+  title: Blazesoft Slot Machine API
+  version: v1
+paths:
+  /Machine/spin:
+    post:
+      tags:
+        - Machine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpinRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SpinRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SpinRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SpinResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpinResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SpinResponse'
+  /Machine/update-balance:
+    post:
+      tags:
+        - Machine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBalanceRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBalanceRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateBalanceRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UpdateBalanceResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBalanceResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBalanceResponse'
+components:
+  schemas:
+    SpinRequest:
+      type: object
+      properties:
+        betAmount:
+          type: number
+          format: double
+      additionalProperties: false
+    SpinResponse:
+      type: object
+      properties:
+        matrix:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer
+              format: int32
+          nullable: true
+        winAmount:
+          type: number
+          format: double
+        balance:
+          type: number
+          format: double
+      additionalProperties: false
+    UpdateBalanceRequest:
+      type: object
+      properties:
+        creditAmount:
+          type: number
+          format: double
+      additionalProperties: false
+    UpdateBalanceResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+      additionalProperties: false
